@@ -1,0 +1,19 @@
+{
+  "name": "clarity",
+  "version": "1.0.0",
+  "description": "discord bot/website middleman",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DwifteJB/Clarity.git"
+  },
+  "author": "Dwifte",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/DwifteJB/Clarity/issues"
+  },
+  "homepage": "https://github.com/DwifteJB/Clarity#readme"
+}
