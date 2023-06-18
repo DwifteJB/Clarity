@@ -9,9 +9,9 @@ module.exports = async (client) => {
     // load slash commands
     new SlashCommandLoader(client).Load();
 
-    client.emit("updateprecense");
+    client.emit("updatePresence");
     setInterval(() => {
-      client.emit("updateprecense");
+      client.emit("updatePresence");
     }, 30000);
   } catch (err) {}
 };

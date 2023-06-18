@@ -9,7 +9,7 @@ module.exports = async (client) => {
       client.user.setPresence({
         activities: [
           {
-            name: `${toDisplay} members!`,
+            name: `${toDisplay} traders!`,
             type: Discord.ActivityType.Watching,
           },
         ],
