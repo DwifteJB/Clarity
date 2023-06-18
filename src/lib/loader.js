@@ -10,10 +10,12 @@ class InteractionHandler {
     this.client = client;
     this.interaction = interaction;
     this.command = this.client.commands.get(this.interaction.commandName);
-    this.channel = this.interaction.channel;
-    this.guild = this.interaction.guild;
+    console.log(this.client.commands);
+    this.channel = this.interaction.guild.channels.cache.get(
+      interaction.channelId
+    );
+    this.guild = this.interaction.member.guild;
     this.user = this.interaction.user;
-    this.member = this.interaction.member;
   }
 }
 
@@ -25,11 +27,11 @@ class Loader {
 
     this.client.commands = new Discord.Collection();
     const folder = fs
-      .readdirSync(path.join(global.rootFolder, "bot", "src", "commands"))
+      .readdirSync(path.join(global.rootFolder, "src", "commands"))
       .filter((file) => file.endsWith(".js"));
     console.clear();
-    console.log("Loading commands!");
-    console.log("╭────────────────────┬──╮");
+    // console.log("Loading commands!");
+    // console.log("╭────────────────────┬──╮");
 
     for (const file of folder) {
       try {
@@ -39,9 +41,9 @@ class Loader {
           "commands",
           file
         ));
-        const boxCmdName = `${command.data.name}`.padEnd(20);
-        console.log(`│${boxCmdName}│✅│`);
-        console.log("├────────────────────┼──┤");
+        // const boxCmdName = `${command.name}`.padEnd(20);
+        // console.log(`│${boxCmdName}│✅│`);
+        // console.log("├────────────────────┼──┤");
         this.client.commands.set(command.data.name, command);
         this.client.cooldowns.set(command.data.name, new Discord.Collection());
       } catch (error) {
@@ -50,7 +52,7 @@ class Loader {
         console.log(error);
       }
     }
-    console.log("╰────────────────────┴──╯");
+    // console.log("╰────────────────────┴──╯");
 
     fs.readdir(path.join(global.rootFolder, "src", "events"), (err, files) => {
       if (err) return console.error;
@@ -65,7 +67,7 @@ class Loader {
         let evtName = file.split(".")[0];
         client.on(evtName, evt.bind(null, this.client));
       }
-      console.log(`Loaded ${files.length} events`);
+      //console.log(`Loaded ${files.length} events`);
     });
   }
 }
@@ -99,7 +101,7 @@ class SlashCommandLoader {
 
       this.client.slashCommandData = data;
 
-      console.log(`Loaded ${data.length} slash commands`);
+      //console.log(`Loaded ${data.length} slash commands`);
     } catch (error) {
       console.error(error);
     }

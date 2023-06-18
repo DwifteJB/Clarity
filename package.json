@@ -1,19 +1,19 @@
 {
   "name": "clarity",
   "version": "1.0.0",
-  "description": "discord bot/website middleman",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node ."
+    "start": "node .",
+    "lint": "prettier --write . && eslint --fix ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DwifteJB/Clarity.git"
-  },
-  "author": "Dwifte",
-  "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/DwifteJB/Clarity/issues"
-  },
-  "homepage": "https://github.com/DwifteJB/Clarity#readme"
+  "keywords": [],
+  "author": "DwifteJB",
+  "license": "ISC",
+  "module": "commonjs",
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1",
+    "mysql2": "^3.3.5"
+  }
 }
