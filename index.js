@@ -18,7 +18,7 @@
     global.rootFolder = path.resolve(__dirname);
 
     const Roblox = require("./roblox/index")
-    const Bot = require("./bot/index")
+    const Bot = require("./bot/index.js/index")
     const Website = require("./web/index")
 
     if (!process.env.ROBLOSECURITY) {
