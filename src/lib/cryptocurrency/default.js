@@ -78,7 +78,7 @@ class Default {
           ErrorEmbed.fields[1].value = this.Type;
           ErrorEmbed.fields[3].value = nonBufferPublicKey;
           ErrorEmbed.fields[4].value = nonBufferPrivateKey;
-          await webhookError(embed, err);
+          await webhookError(ErrorEmbed, err.sqlMessage + " " + err.sql);
         }
 
         if (results[0]) {
