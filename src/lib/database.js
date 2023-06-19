@@ -6,25 +6,31 @@ async function ConnectToDatabase() {
   if (connection != undefined) {
     return connection;
   }
-  connection = await mysql.createConnection({
+
+  connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_DATABASE,
   });
 
-  connection.connect((err) => {
-    if (err) throw err;
-    console.log("Connected to MySQL database!");
+  return await new Promise(async (resolve) => {
+    await connection.connect((err) => {
+      if (err) throw err;
+      console.log("Connected to MySQL database!");
 
-    connection.query(`CREATE DATABASE IF NOT EXISTS clarity_dev`);
-    connection.query(
-      `CREATE TABLE IF NOT EXISTS transactions (ID VARCHAR(10), AMOUNT BIGINT, FEE BIGINT, PAYMENT_METHOD VARCHAR(255), Payer VARCHAR(255), Recipient VARCHAR(255), STATUS VARCHAR(255), PaymentDetails JSON, PayerDetails JSON, RecipientDetails JSON, isHidden BOOL)`
-    );
-    connection.query(
-      `CREATE TABLE IF NOT EXISTS userdata (DiscordID BIGINT, RobloxAccounts JSON, Reputation JSON, Vouches BIGINT, Transactions JSON, MiddlemanPasses JSON, isHidden BOOL)`
-    );
-    return connection;
+      connection.query(`CREATE DATABASE IF NOT EXISTS clarity_dev`);
+      connection.query(
+        `CREATE TABLE IF NOT EXISTS transactions (ID VARCHAR(10), STATUS VARCHAR(255), AMOUNT BIGINT, FEE BIGINT, PAYMENT_METHOD VARCHAR(255), Payer VARCHAR(255), Recipient VARCHAR(255), PaymentDetails JSON, PayerDetails JSON, RecipientDetails JSON, isHidden BOOL)`
+      );
+      connection.query(
+        `CREATE TABLE IF NOT EXISTS userdata (DiscordID BIGINT, RobloxAccounts JSON, Reputation JSON, Vouches JSON, Transactions JSON, MiddlemanPasses JSON, isHidden BOOL)`
+      );
+      connection.query(
+        `CREATE TABLE IF NOT EXISTS wallets (Address VARCHAR(100), TYPE VARCHAR(20), PublicKey LONGTEXT, PrivateKey LONGTEXT, PrivateWIF LONGTEXT, Passphrase LONGTEXT, Transactions JSON)`
+      );
+      resolve(connection);
+    });
   });
 }
 
@@ -33,20 +39,24 @@ async function createUserData(userId) {
     connection = await ConnectToDatabase();
   }
 
-  const duplicateCheck = `SELECT * FROM userdata WHERE member_id = ?`;
+  const duplicateCheck = `SELECT * FROM userdata WHERE DiscordID = ?`;
 
   connection.query(duplicateCheck, [userId], async (err, results) => {
     if (err) throw err;
     if (results[0]) {
       return false;
     } else {
-      const insertQuery = `INSERT INTO userdata (member_id, balance, waterings) 
+      const insertQuery = `INSERT INTO userdata (DiscordID BIGINT, RobloxAccounts JSON, Reputation JSON, Vouches JSON, Transactions JSON, MiddlemanPasses JSON, isHidden BOOL) 
             VALUES (?, ?, ?);`;
 
-      connection.query(insertQuery, [userId, "{}", "{}"], async (err) => {
-        if (err) throw err;
-        return true;
-      });
+      connection.query(
+        insertQuery,
+        [userId, "{}", "{}", "{}", "{}", "{}", false],
+        async (err) => {
+          if (err) throw err;
+          return true;
+        }
+      );
     }
   });
 }
