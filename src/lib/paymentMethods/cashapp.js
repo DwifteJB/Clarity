@@ -1,0 +1,3 @@
+class Cashapp {
+  constructor() {}
+}

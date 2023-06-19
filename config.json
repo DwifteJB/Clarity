@@ -8,5 +8,25 @@
   },
   "settings": {
     "commandTimeout": 2
+  },
+  "paymentFees": {
+    "flatFees": {
+      "Paypal": 2.50,
+      "Bitcoin": 2,
+      "Litecoin": 2,
+      "Ethereum": 2,
+      "Stripe": 1.50,
+      "Cashapp": 2,
+      "Robux": 200
+    },
+    "percentageFees": {
+      "Paypal": 1,
+      "Bitcoin": 0.5,
+      "Litecoin": 0.5,
+      "Ethereum": 0.5,
+      "Stripe": 1,
+      "Cashapp": 1,
+      "Robux": 2
+    }
   }
 }

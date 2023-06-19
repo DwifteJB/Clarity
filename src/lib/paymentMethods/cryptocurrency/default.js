@@ -1,5 +1,5 @@
-const database = require("../database");
-const webhookError = require("../webhookError");
+const database = require("../../database");
+const webhookError = require("../../webhookError");
 const saveKeys = require("./lib/saveKeys");
 
 const ErrorEmbed = {
