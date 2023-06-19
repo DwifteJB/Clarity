@@ -7,17 +7,20 @@
     }
   },
   "settings": {
-    "commandTimeout": 2
+    "commandTimeout": 2,
+    "ticketCategory": 1119795314031874188,
+    "mainDiscord": 1119759762125492256
   },
   "paymentFees": {
     "flatFees": {
-      "Paypal": 2.50,
-      "Bitcoin": 2,
-      "Litecoin": 2,
-      "Ethereum": 2,
+      "Paypal": 3,
+      "Bitcoin": 2.50,
+      "Litecoin": 2.50,
+      "Ethereum": 2.50,
       "Stripe": 1.50,
-      "Cashapp": 2,
-      "Robux": 200
+      "Cashapp": 3,
+      "Robux": 200,
+      "Limited": 3
     },
     "percentageFees": {
       "Paypal": 1,
