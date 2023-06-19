@@ -14,10 +14,10 @@
   "paymentFees": {
     "flatFees": {
       "Paypal": 3,
-      "Bitcoin": 2.50,
-      "Litecoin": 2.50,
-      "Ethereum": 2.50,
-      "Stripe": 1.50,
+      "Bitcoin": 2.5,
+      "Litecoin": 2.5,
+      "Ethereum": 2.5,
+      "Stripe": 1.5,
       "Cashapp": 3,
       "Robux": 200,
       "Limited": 3

@@ -19,7 +19,7 @@ async function ConnectToDatabase() {
       if (err) throw err;
       connection.query(`CREATE DATABASE IF NOT EXISTS clarity_dev`);
       connection.query(
-        `CREATE TABLE IF NOT EXISTS transactions (ID VARCHAR(10), STATUS VARCHAR(255), AMOUNT BIGINT, FEE BIGINT, PAYMENT_METHOD VARCHAR(255), Payer VARCHAR(255), Recipient VARCHAR(255), PaymentDetails JSON, PayerDetails JSON, RecipientDetails JSON, isHidden BOOL)`
+        `CREATE TABLE IF NOT EXISTS transactions (ID VARCHAR(10), STATUS VARCHAR(255), DISCORD_CHANNEL VARCHAR(255), AMOUNT BIGINT, FEE BIGINT, PAYMENT_METHOD VARCHAR(255), Payer VARCHAR(255), Recipient VARCHAR(255), PaymentDetails JSON, PayerDetails JSON, RecipientDetails JSON, isHidden BOOL)`
       );
       connection.query(
         `CREATE TABLE IF NOT EXISTS userdata (DiscordID BIGINT, RobloxAccounts JSON, Reputation JSON, Vouches JSON, Transactions JSON, MiddlemanPasses JSON, isHidden BOOL)`
