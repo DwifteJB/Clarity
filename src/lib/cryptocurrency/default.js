@@ -94,7 +94,7 @@ class Default {
           }
         } else {
           Connection.query(
-            `INSERT INTO wallets (Address, Type, PublicKey, PrivateKey, PrivateWIF, Passphrase, Transactions) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            `INSERT INTO wallets (Address, TYPE, PublicKey, PrivateKey, PrivateWIF, Passphrase, Transactions) VALUES (?, ?, ?, ?, ?, ?, ?)`,
             [
               this.address,
               this.Type,
@@ -104,13 +104,14 @@ class Default {
               this.Passphrase || "",
               "{}",
             ],
-            async (err) => {
+            async (err, res) => {
               if (err) {
+                console.log(err);
                 ErrorEmbed.fields[0].value = this.address;
                 ErrorEmbed.fields[1].value = this.Type;
                 ErrorEmbed.fields[3].value = this.publicKey.toString("hex");
                 ErrorEmbed.fields[4].value = this.privateKey.toString("hex");
-                await webhookError(ErrorEmbed, err);
+                await webhookError(ErrorEmbed, err.sqlMessage + " " + err.sql);
               }
 
               const files = {

@@ -17,8 +17,6 @@ async function ConnectToDatabase() {
   return await new Promise(async (resolve) => {
     await connection.connect((err) => {
       if (err) throw err;
-      console.log("Connected to MySQL database!");
-
       connection.query(`CREATE DATABASE IF NOT EXISTS clarity_dev`);
       connection.query(
         `CREATE TABLE IF NOT EXISTS transactions (ID VARCHAR(10), STATUS VARCHAR(255), AMOUNT BIGINT, FEE BIGINT, PAYMENT_METHOD VARCHAR(255), Payer VARCHAR(255), Recipient VARCHAR(255), PaymentDetails JSON, PayerDetails JSON, RecipientDetails JSON, isHidden BOOL)`
@@ -29,6 +27,9 @@ async function ConnectToDatabase() {
       connection.query(
         `CREATE TABLE IF NOT EXISTS wallets (Address VARCHAR(100), TYPE VARCHAR(20), PublicKey LONGTEXT, PrivateKey LONGTEXT, PrivateWIF LONGTEXT, Passphrase LONGTEXT, Transactions JSON)`
       );
+
+      console.log("Connected to MySQL database!");
+
       resolve(connection);
     });
   });
