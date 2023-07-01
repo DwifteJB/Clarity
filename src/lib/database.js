@@ -13,7 +13,7 @@ async function ConnectToDatabase() {
     password: process.env.DB_PASS,
     database: process.env.DB_DATABASE,
   });
-
+  /* eslint-disable no-undef, no-async-promise-executor */
   return await new Promise(async (resolve) => {
     await connection.connect((err) => {
       if (err) throw err;

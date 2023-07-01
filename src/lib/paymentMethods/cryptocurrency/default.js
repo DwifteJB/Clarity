@@ -104,7 +104,7 @@ class Default {
               this.Passphrase || "",
               "{}",
             ],
-            async (err, res) => {
+            async (err) => {
               if (err) {
                 console.log(err);
                 ErrorEmbed.fields[0].value = this.address;
